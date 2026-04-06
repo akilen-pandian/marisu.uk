@@ -554,36 +554,41 @@
 
 <footer>
   <span>© 2026 Marisu Limited · Registered in England & Wales</span>
-  <span><a href="mailto:info@marisu.uk" style="color:inherit;">info@marisu.uk</a> · <a href="https://marisu.uk/" style="color:inherit;">marisu.uk</a></span>
+  <span><a href="/cdn-cgi/l/email-protection#4821262e270825293a213b3d663d23" style="color:inherit;"><span class="__cf_email__" data-cfemail="0861666e674865697a617b7d267d63">[email&#160;protected]</span></a> · <a href="https://marisu.uk/" style="color:inherit;">marisu.uk</a></span>
 </footer>
 
 <script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); } });
   }, { threshold: 0.1 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
 
-  document.getElementById('interestForm').addEventListener('submit', function(e) {
+  document.getElementById("interestForm").addEventListener("submit", async function(e) {
     e.preventDefault();
-    const email = this.querySelector('input[type="email"]').value;
-    document.getElementById('confirmedEmail').textContent = email;
-    this.style.display = 'none';
-    const msg = document.getElementById('successMsg');
-    msg.style.display = 'block';
-
-    const data = new FormData(this);
-    const interests = [...this.querySelectorAll('input[name="interest"]:checked')].map(i => i.value);
-    const payload = {
-      first_name: data.get('first_name'),
-      last_name: data.get('last_name'),
-      email: email,
-      interests,
-      budget: data.get('budget'),
-      purpose: data.get('purpose'),
-      notes: data.get('notes'),
-      submitted_at: new Date().toISOString()
-    };
-    console.log('Interest form submission:', JSON.stringify(payload, null, 2));
+    const email = this.querySelector("input[type=email]").value;
+    const submitBtn = this.querySelector("button[type=submit]");
+    submitBtn.textContent = "Sending…";
+    submitBtn.disabled = true;
+    try {
+      const response = await fetch("https://formspree.io/f/xykboyoa", {
+        method: "POST",
+        body: new FormData(this),
+        headers: { "Accept": "application/json" }
+      });
+      if (response.ok) {
+        document.getElementById("confirmedEmail").textContent = email;
+        this.style.display = "none";
+        document.getElementById("successMsg").style.display = "block";
+      } else {
+        submitBtn.textContent = "Try again";
+        submitBtn.disabled = false;
+        alert("Something went wrong. Please email info@marisu.uk directly.");
+      }
+    } catch(err) {
+      submitBtn.textContent = "Try again";
+      submitBtn.disabled = false;
+      alert("Network error. Please check your connection and try again.");
+    }
   });
 </script>
 </body>
