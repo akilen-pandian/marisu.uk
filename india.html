@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marisu Home & Kitchen — Curated from India</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #B8860B;
+    --gold-light: #D4A017;
+    --cream: #FAF7F2;
+    --ink: #1A1410;
+    --ink-muted: #5C5248;
+    --border: rgba(184,134,11,0.2);
+    --card-bg: #FFFFFF;
+    --success: #2D6A4F;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid var(--border);
+    background: var(--cream);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-link {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    text-decoration: none;
+  }
+  .nav-link:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .hero-text {
+    padding: 6rem 4rem 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 0.5px;
+    background: var(--gold);
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .hero-body {
+    font-size: 1rem;
+    color: var(--ink-muted);
+    max-width: 38ch;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 0.9rem 2.2rem;
+    background: var(--ink);
+    color: #FAF7F2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-weight: 400;
+    transition: background 0.2s, color 0.2s;
+    border: none;
+    cursor: pointer;
+  }
+  .hero-cta:hover { background: var(--gold); }
+
+  .hero-visual {
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: repeating-linear-gradient(45deg, #B8860B 0, #B8860B 1px, transparent 0, transparent 50%);
+    background-size: 20px 20px;
+  }
+  .hero-icon-cluster {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .big-icon {
+    font-size: 6rem;
+    display: block;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+  .hero-visual-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: rgba(250,247,242,0.5);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* CATEGORIES STRIP */
+  .categories {
+    padding: 4rem 5rem;
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+  }
+  .section-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 0.5px;
+    background: var(--gold);
+  }
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .cat-card {
+    padding: 2.5rem 2rem;
+    background: #fff;
+    border: 0.5px solid var(--border);
+    transition: border-color 0.2s;
+  }
+  .cat-card:hover { border-color: var(--gold); }
+  .cat-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .cat-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--ink);
+  }
+  .cat-desc {
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    line-height: 1.7;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    padding: 4rem 5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+  .about-strip h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.8rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  .about-strip h2 em { font-style: italic; color: var(--gold); }
+  .about-strip p {
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin-bottom: 1rem;
+    line-height: 1.85;
+  }
+
+  .trust-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .trust-item {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+  }
+  .trust-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--border);
+    line-height: 1;
+    min-width: 2.5rem;
+  }
+  .trust-text strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+  }
+  .trust-text span {
+    font-size: 0.82rem;
+    color: var(--ink-muted);
+  }
+
+  /* FORM */
+  #interest {
+    padding: 5rem 5rem 6rem;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  #interest .section-label {
+    color: var(--gold-light);
+  }
+  #interest .section-label::before { background: var(--gold-light); }
+  #interest h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3vw, 3rem);
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+  #interest .sub {
+    font-size: 0.9rem;
+    color: rgba(250,247,242,0.55);
+    margin-bottom: 3rem;
+    max-width: 50ch;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    max-width: 680px;
+  }
+  .form-grid .full { grid-column: 1 / -1; }
+
+  .field label {
+    display: block;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.45);
+    margin-bottom: 0.5rem;
+  }
+  .field input,
+  .field select,
+  .field textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 0.5px solid rgba(250,247,242,0.15);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    padding: 0.8rem 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .field input:focus,
+  .field select:focus,
+  .field textarea:focus {
+    border-color: var(--gold);
+  }
+  .field select option { background: #1A1410; color: var(--cream); }
+  .field textarea { resize: vertical; min-height: 100px; }
+
+  .checkboxes-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.45);
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .checkbox-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+  }
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    cursor: pointer;
+  }
+  .checkbox-item input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+  .checkbox-item span {
+    font-size: 0.85rem;
+    color: rgba(250,247,242,0.7);
+  }
+
+  .submit-btn {
+    margin-top: 0.5rem;
+    padding: 1rem 2.8rem;
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover { background: var(--gold-light); }
+
+  .success-msg {
+    display: none;
+    padding: 1.5rem 2rem;
+    border: 0.5px solid var(--gold);
+    color: var(--cream);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+    max-width: 480px;
+  }
+  .success-msg strong { color: var(--gold); display: block; margin-bottom: 0.25rem; font-size: 1rem; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 5rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+
+  /* FADE IN */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .hero-text { padding: 4rem 1.5rem; }
+    .categories { padding: 3rem 1.5rem; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .about-strip { grid-template-columns: 1fr; padding: 3rem 1.5rem; gap: 3rem; }
+    #interest { padding: 3rem 1.5rem 4rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .checkbox-group { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 0.75rem; padding: 2rem 1.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://marisu.uk/" class="nav-logo">Marisu <span>Home &amp; Kitchen</span></a>
+  <a href="#interest" class="nav-link">Register interest</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-text fade-in">
+    <p class="hero-eyebrow">New from Marisu Limited</p>
+    <h1>Crafted in India.<br><em>Loved</em> at home.</h1>
+    <p class="hero-body">We are bringing a carefully curated selection of handcrafted Indian cookware, brass ornaments and artisan home décor to the UK — sourced directly from skilled makers.</p>
+    <a href="#interest" class="hero-cta">Register your interest</a>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-pattern"></div>
+    <div class="hero-icon-cluster">
+      <span class="big-icon">🪔</span>
+      <p class="hero-visual-label">Handcrafted in India</p>
+    </div>
+  </div>
+</section>
+
+<section class="categories fade-in">
+  <p class="section-label">What we are sourcing</p>
+  <div class="cat-grid">
+    <div class="cat-card">
+      <span class="cat-icon">🍳</span>
+      <p class="cat-title">Cookware</p>
+      <p class="cat-desc">Cast iron kadais, brass and copper vessels, traditional tawa pans — built to last generations and elevate everyday cooking.</p>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🏺</span>
+      <p class="cat-title">Brass & Copper Ornaments</p>
+      <p class="cat-desc">Diyas, figurines, decorative bowls and trays — hand-finished pieces that bring warmth and character to any space.</p>
+    </div>
+    <div class="cat-card">
+      <span class="cat-icon">🪴</span>
+      <p class="cat-title">Handcrafted Home Décor</p>
+      <p class="cat-desc">Wall art, woven baskets, carved wood accents and artisan pieces rooted in centuries of Indian craft tradition.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about-strip fade-in">
+  <div>
+    <p class="section-label">Our promise</p>
+    <h2>Quality you can feel.<br><em>Provenance</em> you can trust.</h2>
+    <p>We work directly with artisans and small workshops in India — not mass-market suppliers. Every piece we select is chosen for craftsmanship, durability and authentic character.</p>
+    <p>As a UK-based company (registered in England & Wales), we handle all import, compliance and delivery, so you buy with complete confidence.</p>
+  </div>
+  <div class="trust-items">
+    <div class="trust-item">
+      <span class="trust-num">01</span>
+      <div class="trust-text"><strong>Direct from artisans</strong><span>Sourced from skilled makers, not mass-market suppliers</span></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">02</span>
+      <div class="trust-text"><strong>UK-based & fully compliant</strong><span>All import, customs and consumer law compliance handled by us</span></div>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">03</span>
+      <div class="trust-text"><strong>You shape what we bring</strong><span>Your interest tells us what to import — no guesswork</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="interest" class="fade-in">
+  <p class="section-label">Express your interest</p>
+  <h2>Tell us what you'd love to see</h2>
+  <p class="sub">We are still sourcing and have not yet imported stock. Register below and you will be among the first to know — and to buy.</p>
+
+  <form id="interestForm">
+    <div class="form-grid">
+      <div class="field">
+        <label>First name</label>
+        <input type="text" name="first_name" placeholder="Priya" required>
+      </div>
+      <div class="field">
+        <label>Last name</label>
+        <input type="text" name="last_name" placeholder="Sharma">
+      </div>
+      <div class="field full">
+        <label>Email address</label>
+        <input type="email" name="email" placeholder="priya@example.com" required>
+      </div>
+      <div class="field full">
+        <label>What are you most interested in? (select all that apply)</label>
+      </div>
+    </div>
+
+    <span class="checkboxes-label">Product interests</span>
+    <div class="checkbox-group">
+      <label class="checkbox-item"><input type="checkbox" name="interest" value="cookware"><span>Cookware (cast iron, brass, copper)</span></label>
+      <label class="checkbox-item"><input type="checkbox" name="interest" value="ornaments"><span>Brass & copper ornaments</span></label>
+      <label class="checkbox-item"><input type="checkbox" name="interest" value="decor"><span>Handcrafted home décor</span></label>
+      <label class="checkbox-item"><input type="checkbox" name="interest" value="gifts"><span>Gifts & special occasions</span></label>
+    </div>
+
+    <div class="form-grid" style="margin-bottom:1.25rem;">
+      <div class="field">
+        <label>Typical budget per item</label>
+        <select name="budget">
+          <option value="">Please select</option>
+          <option value="under25">Under £25</option>
+          <option value="25-50">£25 – £50</option>
+          <option value="50-100">£50 – £100</option>
+          <option value="100plus">£100+</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Buying for</label>
+        <select name="purpose">
+          <option value="">Please select</option>
+          <option value="personal">Personal use</option>
+          <option value="gift">Gifts</option>
+          <option value="both">Both</option>
+          <option value="trade">Trade / resale</option>
+        </select>
+      </div>
+      <div class="field full">
+        <label>Anything specific you'd love us to source? (optional)</label>
+        <textarea name="notes" placeholder="e.g. a 26cm cast iron kadai, brass Ganesha figurines, hand-painted clay pots..."></textarea>
+      </div>
+    </div>
+
+    <button type="submit" class="submit-btn">Register my interest</button>
+  </form>
+
+  <div class="success-msg" id="successMsg">
+    <strong>Thank you — we will be in touch!</strong>
+    Your interest has been registered. We will email you at <span id="confirmedEmail"></span> as soon as products become available.
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Marisu Limited · Registered in England & Wales</span>
+  <span><a href="mailto:info@marisu.uk" style="color:inherit;">info@marisu.uk</a> · <a href="https://marisu.uk/" style="color:inherit;">marisu.uk</a></span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.getElementById('interestForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    document.getElementById('confirmedEmail').textContent = email;
+    this.style.display = 'none';
+    const msg = document.getElementById('successMsg');
+    msg.style.display = 'block';
+
+    const data = new FormData(this);
+    const interests = [...this.querySelectorAll('input[name="interest"]:checked')].map(i => i.value);
+    const payload = {
+      first_name: data.get('first_name'),
+      last_name: data.get('last_name'),
+      email: email,
+      interests,
+      budget: data.get('budget'),
+      purpose: data.get('purpose'),
+      notes: data.get('notes'),
+      submitted_at: new Date().toISOString()
+    };
+    console.log('Interest form submission:', JSON.stringify(payload, null, 2));
+    fetch('mailto:info@marisu.uk');
+  });
+</script>
+</body>
+</html>
